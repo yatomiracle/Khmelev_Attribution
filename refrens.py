@@ -1,21 +1,19 @@
 import collections
 
 def delete_repeating_phrases(filename):
-    # read the file and split it into words
     with open(filename, 'r', encoding='utf-8') as file:
-        text = file.read()
+        text = file.read() # чтение текстового файла
         for sym in '.,:;«»“”!?—"()':
-            text = text.replace(sym, '')
-        text = text.lower()
-    words = text.split()
+            text = text.replace(sym, '') # все ненужные для анализа символы заменяются на пустые
+        text = text.lower() # текст переводится в нижний регистр
+    words = text.split() # текст делится на слова
 
-    # create a list of phrases of length 3 or more
     phrases = []
     for i in range(len(words) - 2):
-        phrase = ' '.join(words[i:i+3])
+        phrase = ' '.join(words[i:i+3]) # создаются все возможные фразы, состоящие из трёх поряд идущих слов
         if len(phrase.split()) >= 3:
-            phrases.append(phrase)
-    counter = collections.Counter(phrases)
+            phrases.append(phrase) # эти фразы добавляются в список
+    counter = collections.Counter(phrases) # происходит подсчёт совпадений фраз в списке
     print(counter)
 
 delete_repeating_phrases('file.txt')
